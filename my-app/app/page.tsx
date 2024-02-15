@@ -1,3 +1,9 @@
+import SignUp from "./sign-up/page";
+
 export default function Home() {
-  return <h1>Hello</h1>;
+  return (
+    <>
+      <SignUp />
+    </>
+  );
 }
