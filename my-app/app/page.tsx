@@ -1,5 +1,4 @@
-import SignUp from "./sign-up/page";
-
+"use-client";
 export default function Home() {
   return (
     <>
