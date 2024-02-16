@@ -13,7 +13,7 @@ const SignUp = () => {
     try {
       const res = await createUserWithEmailAndPassword(email, password);
       console.log({ res });
-      sessionStorage.setItem("user", true);
+      sessionStorage.setItem("user", String(true));
       setEmail("");
       setPassword("");
     } catch (e) {
