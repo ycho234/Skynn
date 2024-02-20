@@ -11,10 +11,8 @@ const SignIn = () => {
 
   const handleSignIn = async () => {
     if (!email || !password) {
-      alert("Please provide both the email and password you signed up with!");
-      throw new Error(
-        "Please provide both email and password you signed up with."
-      );
+      alert("Please fill in all fields.");
+      return;
     }
     const auth = getAuth(app);
     signInWithEmailAndPassword(auth, email, password)
@@ -24,7 +22,7 @@ const SignIn = () => {
         sessionStorage.setItem("user", String(true));
         setEmail("");
         setPassword("");
-        router.push("/");
+        router.push("/sign-out");
       })
       .catch((e) => {
         alert(
