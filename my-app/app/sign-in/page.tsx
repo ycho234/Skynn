@@ -1,27 +1,37 @@
 "use client";
 import { useState } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
+import { app } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
 
   const handleSignIn = async () => {
-    try {
-      const res = await signInWithEmailAndPassword(email, password);
-      console.log({ res });
-      sessionStorage.setItem("user", String(true));
-      setEmail("");
-      setPassword("");
-      router.push("/");
-    } catch (e) {
-      console.error(e);
+    if (!email || !password) {
+      alert("Please provide both the email and password you signed up with!");
+      throw new Error(
+        "Please provide both email and password you signed up with."
+      );
     }
+    const auth = getAuth(app);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log({ user });
+        sessionStorage.setItem("user", String(true));
+        setEmail("");
+        setPassword("");
+        router.push("/");
+      })
+      .catch((e) => {
+        alert(
+          "Please create an account first! Or check your email and password."
+        );
+        console.error(e);
+      });
   };
 
   return (

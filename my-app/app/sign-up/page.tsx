@@ -1,33 +1,38 @@
 "use client";
 import { useState } from "react";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
-import { auth } from "@/app/firebase/config";
+import { app } from "@/app/firebase/config";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [createUserWithEmailAndPassword] =
-    useCreateUserWithEmailAndPassword(auth);
+  const router = useRouter();
 
   const handleSignUp = async () => {
-    try {
-      const res = await createUserWithEmailAndPassword(email, password);
-      console.log({ res });
-      sessionStorage.setItem("user", String(true));
-      setEmail("");
-      setPassword("");
-    } catch (e) {
-      console.error(e);
-    }
+    const auth = getAuth(app);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log({ user });
+        sessionStorage.setItem("user", String(true));
+        setEmail("");
+        setPassword("");
+        router.push("/sign-in");
+        alert("You have successfully signed up! Please sign in.");
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   return (
     <div className="min-h-screen flex-col cols-1 items-center justify-center bg-customLightGreen">
-      <div><Image src="/logo.png" alt="Skynn Logo" width={160} height={40} />
+      <div>
+        <Image src="/logo.png" alt="Skynn Logo" width={160} height={40} />
       </div>
       <div className="bg-customLightGreen p-10 rounded-lg shadow-xl w-96">
-        
         <input
           type="email"
           placeholder="Email"
@@ -49,9 +54,7 @@ const SignUp = () => {
           Sign Up
         </button>
       </div>
-      
     </div>
-    
   );
 };
 
