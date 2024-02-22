@@ -1,5 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -14,4 +15,33 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const auth = getAuth(app);
 
+const firestore = getFirestore();
+
+// const productsCollection = collection(firestore, "products");
+
+// async function addNewDocument() {
+//   try {
+//     const newDoc = await addDoc(Products, {
+//       name: "My Product",
+//       description: "This is my product",
+//     });
+//     console.log(`Your doc was created at ${newDoc.path}`);
+//   } catch (error) {
+//     console.error("Error adding document: ", error);
+//   }
+// }
+
+// addNewDocument();
+
+const productsCollection = doc(firestore, products);
+function addNewDoc() {
+  const docData = {
+    name: "My Product",
+    price: 100,
+    description: "This is my product",
+  };
+  setDoc(productsCollection, docData);
+}
+console.log("hello");
+addNewDoc();
 export { app, auth };
