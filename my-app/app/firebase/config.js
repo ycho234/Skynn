@@ -1,6 +1,7 @@
-import { initializeApp, getApps, getApp } from "firebase/app";
+import exp from "constants";
+import {initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+// import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,7 +16,7 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const auth = getAuth(app);
 
-const firestore = getFirestore();
+// const firestore = getFirestore();
 
 // const productsCollection = collection(firestore, "products");
 
@@ -33,15 +34,32 @@ const firestore = getFirestore();
 
 // addNewDocument();
 
-const productsCollection = doc(firestore, products);
-function addNewDoc() {
-  const docData = {
-    name: "My Product",
-    price: 100,
-    description: "This is my product",
-  };
-  setDoc(productsCollection, docData);
-}
-console.log("hello");
-addNewDoc();
+// const productsCollection = doc(firestore, products);
+// function addNewDoc() {
+//   const docData = {
+//     name: "My Product",
+//     price: 100,
+//     description: "This is my product",
+//   };
+//   setDoc(productsCollection, docData);
+// }
+// console.log("hello");
+// addNewDoc();
+
+// export default function Data(){
+// const db = firebase.firestore(app);
+
+// db.collection("products").add({
+//   name: "My Product",
+//   price: 100,
+//   description: "This is my product",
+// })
+// .then((docRef) => {
+//   console.log("Document written with ID: ", docRef.id);
+// })
+// .catch((error) => {
+//   console.error("Error adding document: ", error);
+// });
+// }
+
 export { app, auth };
