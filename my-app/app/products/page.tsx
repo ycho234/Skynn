@@ -8,6 +8,7 @@ interface ProductType {
   name: string;
   description: string;
   brand: string;
+  price: number;
 }
 
 export default function ProductsPage() {
