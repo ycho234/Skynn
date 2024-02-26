@@ -11,6 +11,9 @@ interface ProductType {
   price: number;
 }
 
+interface errorType {
+  message: string;
+}
 export default function ProductsPage() {
   const [productsList, setProductList] = useState<null | any[]>(null);
 
@@ -20,12 +23,12 @@ export default function ProductsPage() {
         const db = getFirestore(app);
         const colRef = collection(db, "products");
         const snapshot = await getDocs(colRef);
-        let productsArray: ProductType[] = [];
+        let productsArray: ProductType[] | any = [];
         snapshot.docs.forEach((doc) => {
           productsArray.push({ ...doc.data(), id: doc.id });
         });
         setProductList(productsArray);
-      } catch (error) {
+      } catch (error: errorType | any) {
         console.error("Error fetching products:", error.message);
       }
     };
