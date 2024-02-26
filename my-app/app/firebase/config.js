@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,7 +15,45 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const auth = getAuth(app);
 
-const firestore = getFirestore();
+// const db = getFirestore();
+
+// const colRef = collection(db, "products");
+
+// getDocs(colRef)
+// .then((snapshot) => {
+//   let products = [];
+//   snapshot.docs.forEach((docs) => {
+//     products.push({ ...docs.data(), id: docs.id });
+//     });
+//   console.log(products);
+// })
+// .catch((err) => {
+//   console.log(err.message);
+//   });
+
+export default async function products() {
+  const db = getFirestore();
+  const colRef = collection(db, "products");
+
+  // try {
+  //   const snapshot = await getDocs(colRef);
+  //   const products = snapshot.docs.map((doc) => ({
+  //     ...doc.data(),
+  //     id: doc.id,
+  getDocs(colRef)
+    .then((snapshot) => {
+      let products = [];
+      snapshot.docs.forEach((docs) => {
+        products.push({ ...docs.data(), id: docs.id });
+      });
+      console.log(products);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
+
+products();
 
 // const productsCollection = collection(firestore, "products");
 
@@ -33,15 +71,15 @@ const firestore = getFirestore();
 
 // addNewDocument();
 
-const productsCollection = doc(firestore, products);
-function addNewDoc() {
-  const docData = {
-    name: "My Product",
-    price: 100,
-    description: "This is my product",
-  };
-  setDoc(productsCollection, docData);
-}
-console.log("hello");
-addNewDoc();
+// const productsCollection = doc(firestore, products);
+// function addNewDoc() {
+//   const docData = {
+//     name: "My Product",
+//     price: 100,
+//     description: "This is my product",
+//   };
+//   setDoc(productsCollection, docData);
+// }
+// console.log("hello");
+// addNewDoc();
 export { app, auth };
