@@ -1,8 +1,10 @@
 "use-client";
 import Image from "next/image";
 import Link from "next/link";
+// import Data from './firebase/config'
 
 export default function Home() {
+  // Data();
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#F3F6F1] ">
       <Image src="/logo.png" alt="Skynn Logo" width={300} height={300} />

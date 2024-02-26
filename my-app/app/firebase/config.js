@@ -1,3 +1,4 @@
+import exp from "constants";
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
@@ -15,31 +16,10 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const auth = getAuth(app);
 
-// const db = getFirestore();
-
-// const colRef = collection(db, "products");
-
-// getDocs(colRef)
-// .then((snapshot) => {
-//   let products = [];
-//   snapshot.docs.forEach((docs) => {
-//     products.push({ ...docs.data(), id: docs.id });
-//     });
-//   console.log(products);
-// })
-// .catch((err) => {
-//   console.log(err.message);
-//   });
-
 export default async function products() {
   const db = getFirestore();
   const colRef = collection(db, "products");
 
-  // try {
-  //   const snapshot = await getDocs(colRef);
-  //   const products = snapshot.docs.map((doc) => ({
-  //     ...doc.data(),
-  //     id: doc.id,
   getDocs(colRef)
     .then((snapshot) => {
       let products = [];
@@ -55,31 +35,4 @@ export default async function products() {
 
 products();
 
-// const productsCollection = collection(firestore, "products");
-
-// async function addNewDocument() {
-//   try {
-//     const newDoc = await addDoc(Products, {
-//       name: "My Product",
-//       description: "This is my product",
-//     });
-//     console.log(`Your doc was created at ${newDoc.path}`);
-//   } catch (error) {
-//     console.error("Error adding document: ", error);
-//   }
-// }
-
-// addNewDocument();
-
-// const productsCollection = doc(firestore, products);
-// function addNewDoc() {
-//   const docData = {
-//     name: "My Product",
-//     price: 100,
-//     description: "This is my product",
-//   };
-//   setDoc(productsCollection, docData);
-// }
-// console.log("hello");
-// addNewDoc();
 export { app, auth };
