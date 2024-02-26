@@ -40,12 +40,26 @@ export default function ProductsPage() {
     <div>
       <h1>Products</h1>
       <ul>
+        
         {productsList &&
           productsList.map((product) => (
             <li key={product.id}>
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
-              <p>Price: ${product.price}</p>
+              <br></br>
+              <h3 className ="font-bold">{product.name}</h3>
+              <Image
+                src={product.photo}
+                alt={product.name}
+                width={200}
+                height={200}
+                />
+              <p>Description: {product.description}</p>
+              <p>Price: £{product.price}</p>
+              <p>Brand: {product.brand}</p>
+              <p>For Skin Types: {product.skinType}</p>
+              <p>Buy from: {product.shops}</p>
+              <p>Rating: {product.rating}</p>
+              <p>Key Ingredients: {product.keyIngredients}</p>
+              <p>Benefits: {product.benefits}</p>
             </li>
           ))}
       </ul>
