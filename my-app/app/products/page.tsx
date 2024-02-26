@@ -1,36 +1,50 @@
 "use client";
 import Image from "next/image";
-
+import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import products from "../firebase/config";
+import { app } from "../firebase/config";
 
-products();
+interface ProductType {
+  name: string;
+  description: string;
+  brand: string;
+}
 
 export default function ProductsPage() {
+  const [productsList, setProductList] = useState<null | any[]>(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const db = getFirestore(app);
+        const colRef = collection(db, "products");
+        const snapshot = await getDocs(colRef);
+        let productsArray: ProductType[] = [];
+        snapshot.docs.forEach((doc) => {
+          productsArray.push({ ...doc.data(), id: doc.id });
+        });
+        setProductList(productsArray);
+      } catch (error) {
+        console.error("Error fetching products:", error.message);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <div>
       <h1>Products</h1>
+      <ul>
+        {productsList &&
+          productsList.map((product) => (
+            <li key={product.id}>
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <p>Price: ${product.price}</p>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }
-
-// export default function Products() {
-//   return (
-//     <div
-//       style={{
-//         backgroundColor: "#f3f6f1",
-//         minHeight: "100vh",
-//         display: "flex",
-//         justifyContent: "center",
-//         alignItems: "center",
-//       }}
-//     >
-//       <div>
-//         <Image src="/logo.png" alt="Skynn Logo" width={80} height={20} />
-//         <h1 className="text-xl text-center text-customDarkGreen mt-10">
-//           Products Page
-//         </h1>
-//       </div>
-//     </div>
-//   );
-// }
