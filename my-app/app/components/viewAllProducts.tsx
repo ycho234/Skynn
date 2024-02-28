@@ -15,6 +15,33 @@ interface errorType {
   message: string;
 }
 
+
+function getStarRating(rating) {
+  const fullStars = Math.floor(rating);
+  const halfStar = rating % 1 === 0.5 ? 1 : 0;
+  const emptyStars = 5 - fullStars - halfStar;
+
+  const stars = [];
+
+  for (let i = 0; i < fullStars; i++) {
+    stars.push('⭐️');
+  }
+
+  if (halfStar) {
+    stars.push('⭐️');
+  }
+
+  for (let i = 0; i < emptyStars; i++) {
+    stars.push('☆');
+  }
+
+  return stars.join('');
+}
+
+
+
+
+
 export default function ViewAllProducts() {
   const [productsList, setProductList] = useState<null | any[]>(null);
 
@@ -38,21 +65,26 @@ export default function ViewAllProducts() {
   }, []);
 
   return (
-    <div className="bg-customLightGreen">
+    <div className="bg-customLightGreen grid grid-cols-2 gap-1">
       {productsList &&
         productsList.map((product) => (
-          <div
-            key={product.id}
-            className="border-red-600 border-4 w-[80%] m-auto mb-10 flex justify-center bg-white rounded-lg"
-          >
-            <Image
-              src={product.photo}
-              alt={product.name}
-              width={300}
-              height={300}
-            />
+          <div key={product.id}>
+            <div
+              className="border-gray-300 border-4 mx-10 my-10 flex justify-center bg-white rounded-lg"
+            >
+              <Image
+                src={product.photo}
+                alt={product.name}
+                width={200}
+                height={200}
+                className="self-center"
+              />
+            </div>
+            <p className="text-center"> {product.brand}</p>
+            <p className="text-center">{product.name}</p>
+            <p className="text-center">Rating {getStarRating(product.rating)}</p>
           </div>
         ))}
     </div>
-  );
+  ); 
 }
