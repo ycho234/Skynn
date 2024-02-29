@@ -20,13 +20,13 @@ export default function Home() {
       </div>
       <div className=" flex flex-col gap-2 lg:flex-row lg:gap-5 pt-8">
         <Link href="/sign-up">
-          <button className="bg-[#DCDFDA] border-[3px] border-[#A6A9A3] text-[#474547] w-56 py-1 rounded-full mt-5 text-lg ">
+          <button className="bg-[#DCDFDA] border-[3px] border-[#A6A9A3] text-[#474547] w-56 py-1 rounded-full mt-5 text-lg font-medium">
             {" "}
             Register{" "}
           </button>
         </Link>
         <Link href="/sign-in">
-          <button className="bg-[#FEFFFD] border-[3px] border-[#A6A9A3] text-[#474547] w-56 py-1 rounded-full mt-5 text-lg ">
+          <button className="bg-[#FEFFFD] border-[3px] border-[#A6A9A3] text-[#474547] w-56 py-1 rounded-full mt-5 text-lg font-medium">
             {" "}
             Login{" "}
           </button>
