@@ -11,7 +11,7 @@ export default function Footer() {
       </Link>
     </div>
     <div className="flex flex-col items-center">
-      <Link href="/Products" className="flex items-center">
+      <Link href="/products" className="flex items-center">
       <span>Products</span>
       </Link>
     </div>
