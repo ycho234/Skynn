@@ -87,7 +87,7 @@ export default function ViewAllProducts() {
                 alt={product.name}
                 width={200}
                 height={200}
-                className="self-center"
+                className="self-center rounded-xl"
               />
             </div>
             <p className="text-center"> {product.brand.toUpperCase()}</p>
