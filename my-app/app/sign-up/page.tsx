@@ -48,7 +48,7 @@ const SignUp = () => {
         />
       </div>
       <div className="flex flex-col items-start mb-7 ">
-        <p className="text-[#6C696C] text-sm mt-4 mb-1">Create a password</p>
+        <p className="text-[#6C696C] text-sm mt-3 mb-1">Create a password</p>
         <input
           type="password"
           placeholder="Your password"

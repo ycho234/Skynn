@@ -55,7 +55,7 @@ const SignIn = () => {
           />
         </div>
         <div className="flex flex-col items-start mb-7 ">
-          <p className="text-[#6C696C] text-sm mt-4 mb-1">Create a password</p>
+          <p className="text-[#6C696C] text-sm mt-3 mb-1">Create a password</p>
           <input
             type="password"
             placeholder="Your password"
@@ -70,7 +70,7 @@ const SignIn = () => {
         </div>
         <button
           onClick={handleSignIn}
-          className="bg-[#DCDFDA] border-[3px] border-[#A6A9A3] text-[#474547] w-72 py-1 h-10 rounded-full text-lg font-medium mb-1"
+          className="bg-[#DCDFDA] border-[3px] border-[#A6A9A3] text-[#474547]  w-72 py-1 h-10 rounded-full text-lg font-medium mb-1"
         >
           Sign In
         </button>
