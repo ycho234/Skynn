@@ -4,6 +4,7 @@ import { app } from "@/app/firebase/config";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
@@ -28,32 +29,49 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex-col cols-1 items-center justify-center bg-customLightGreen">
-      <div>
-        <Image src="/logo.png" alt="Skynn Logo" width={160} height={40} />
-      </div>
-      <div className="bg-customLightGreen p-10 rounded-lg shadow-xl w-96">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-[#F3F6F1]">
+      <Image src="/logo.png" alt="Skynn Logo" width={300} height={300} />
+      <div className="flex flex-col items-start">
+        <p className="text-[#6C696C] text-sm mt-14 lg:mt-8 mb-1">
+          Email Address
+        </p>
         <input
           type="email"
-          placeholder="Email"
+          placeholder="Your email address"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 mb-4 bg-gray-500 rounded-3xl outline-none text-white placeholder-gray-500 border-solid border-2 border-gray-400"
+          className="bg-[#FEFFFD] border-[2px] border-[#A6A9A3] text-[#716e71] placeholder-[#8D8B8D] w-72 py-1 h-10 text-center rounded-full text-sm focus:outline-none"
+          style={{
+            WebkitTextFillColor: "#8D8B8D",
+            WebkitBoxShadow: "0 0 0 30px #FEFFFD inset",
+          }}
         />
+      </div>
+      <div className="flex flex-col items-start mb-7 ">
+        <p className="text-[#6C696C] text-sm mt-4 mb-1">Create a password</p>
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-3 mb-4 bg-gray-500 rounded-3xl outline-none text-white placeholder-gray-500 border-solid border-2 border-gray-400"
+          className="bg-[#FEFFFD] border-[2px] border-[#A6A9A3] text-[#716e71] placeholder-[#8D8B8D] w-72 py-1 h-10 text-center rounded-full text-sm focus:outline-none"
+          style={{
+            WebkitTextFillColor: "#8D8B8D",
+            WebkitBoxShadow: "0 0 0 30px #FEFFFD inset",
+          }}
         />
-        <button
-          onClick={handleSignUp}
-          className="w-full p-3 bg-customDarkGreen rounded-3xl text-white hover:bg-lime-800"
-        >
-          Sign Up
-        </button>
       </div>
+      <button
+        onClick={handleSignUp}
+        className="bg-[#DCDFDA] border-[3px] border-[#A6A9A3] text-[#474547] w-72 py-1 h-10 rounded-full text-lg font-medium mb-1"
+      >
+        Sign Up
+      </button>
+      <Link href="/sign-in">
+        <p className="hover:underline text-[#7C7C7C] text-sm mb-34 lg:mb-2 mt-2">
+          Already have an account? Sign in.
+        </p>
+      </Link>
     </div>
   );
 };
