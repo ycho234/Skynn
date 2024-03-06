@@ -80,7 +80,7 @@ export default function ViewAllProducts() {
         <h2 className="text-2xl font-medium pl-4 text-[#474547]">
           View All Products
         </h2>
-        <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10">
           {productsList &&
             productsList.map((product) => (
               <div key={product.id}>
