@@ -24,7 +24,7 @@ const SignIn = () => {
         sessionStorage.setItem("user", String(true));
         setEmail("");
         setPassword("");
-        router.push("/sign-out");
+        router.push("/products");
       })
       .catch((e) => {
         alert(

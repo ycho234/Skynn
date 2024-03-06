@@ -9,13 +9,11 @@ interface ProductType {
   description: string;
   brand: string;
   price: number;
-  
 }
 
 interface errorType {
   message: string;
 }
-
 
 function getStarRating(rating: number) {
   const fullStars = Math.floor(rating);
@@ -25,23 +23,19 @@ function getStarRating(rating: number) {
   const stars = [];
 
   for (let i = 0; i < fullStars; i++) {
-    stars.push('⭐️');
+    stars.push("★");
   }
 
   if (halfStar) {
-    stars.push('⭐️');
+    stars.push("★");
   }
 
   for (let i = 0; i < emptyStars; i++) {
-    stars.push('☆');
+    stars.push("☆");
   }
 
-  return stars.join('');
+  return stars.join("");
 }
-
-
-
-
 
 export default function ViewAllProducts() {
   const [productsList, setProductList] = useState<null | any[]>(null);
@@ -65,37 +59,57 @@ export default function ViewAllProducts() {
     fetchProducts();
   }, []);
 
-  return (<>
-  <div className="bg-customLightGreen grid grid-col-1 justify-center items-center">
-  <Image src="/logo.png" alt="Skynn Logo" width={160} height={40} className="pt-6 w-80"/>
+  return (
+    <>
+      {/* <div className="bg-customLightGreen grid grid-col-1 justify-center items-center">
+        <Image
+          src="/logo.png"
+          alt="Skynn Logo"
+          width={200}
+          height={200}
+          className="pt-6 w-80"
+        />
 
-  <input type="text" placeholder="Search for products" className="border-2 border-gray-300 rounded-2xl p-1 my-4 w-80"/>
-</div>
-
-  <h1 className="text-center text-xl font-bold py-4">Trending Products Go Here</h1>
-  <h2 className="text-2xl py-2 bg-customLightGreen">View All Products</h2>
-    <div className="bg-customLightGreen grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
-      
-      {productsList &&
-        productsList.map((product) => (
-          <div key={product.id}>
-            <div
-              className="border-gray-300 border-2 mx-10 my-10 flex justify-center bg-white rounded-xl shadow-lg"
-            >
-              <Image
-                src={product.photo}
-                alt={product.name}
-                width={200}
-                height={200}
-                className="self-center rounded-xl"
-              />
-            </div>
-            <p className="text-center"> {product.brand.toUpperCase()}</p>
-            <p className="text-center">{product.name}</p>
-            <p className="text-center">Rating {getStarRating(product.rating)}{product.rating}</p>
-          </div>
-        ))}
-    </div>
+        <input
+          type="text"
+          placeholder="Search for products"
+          className="border-2 border-gray-300 rounded-2xl p-1 my-4 w-80"
+        />
+      </div> */}
+      <div className="bg-customLightGreen px-6 pb-20">
+        <h2 className="text-2xl font-medium pl-4 text-[#474547]">
+          View All Products
+        </h2>
+        <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {productsList &&
+            productsList.map((product) => (
+              <div key={product.id}>
+                <div className="border-[#A6A9A4] border-[3px] my-4 mx-[10px] flex justify-center bg-white rounded-3xl hover:border-[#858a82] transition duration-300 ease-in-out drop-shadow-custom hover:drop-shadow-customHover">
+                  <Image
+                    src={product.photo}
+                    alt={product.name}
+                    width={200}
+                    height={200}
+                    className="self-center rounded-3xl"
+                  />
+                </div>
+                <p className="text-center font-medium text-[#474547]">
+                  {" "}
+                  {product.brand.toUpperCase()}
+                </p>
+                <p className="text-center text-sm text-[#474547]">
+                  {product.name}
+                </p>
+                <div className="flex flex-row justify-center items-center">
+                  <p className=" text-[#EBD300] text-2xl">
+                    {getStarRating(product.rating)}
+                  </p>
+                  <p className="pl-1">{product.rating}</p>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
     </>
-  ); 
+  );
 }
