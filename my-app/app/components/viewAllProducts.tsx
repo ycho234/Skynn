@@ -80,11 +80,11 @@ export default function ViewAllProducts() {
         <h2 className="text-2xl font-medium pl-4 text-[#474547]">
           View All Products
         </h2>
-        <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6">
           {productsList &&
             productsList.map((product) => (
               <div key={product.id}>
-                <div className="border-[#A6A9A4] border-[3px] my-4 mx-[10px] flex justify-center bg-white rounded-3xl hover:border-[#858a82] transition duration-300 ease-in-out drop-shadow-custom hover:drop-shadow-customHover">
+                <div className="border-[#A6A9A4] border-[2px] my-4 mx-[10px] flex justify-center bg-white rounded-3xl hover:border-[#858a82] transition duration-300 ease-in-out drop-shadow-custom hover:drop-shadow-customHover">
                   <Image
                     src={product.photo}
                     alt={product.name}
@@ -101,10 +101,10 @@ export default function ViewAllProducts() {
                   {product.name}
                 </p>
                 <div className="flex flex-row justify-center items-center">
-                  <p className=" text-[#EBD300] text-2xl">
+                  <p className=" text-[#EBD300] text-xl">
                     {getStarRating(product.rating)}
                   </p>
-                  <p className="pl-1">{product.rating}</p>
+                  <p className="pl-1 text-sm ">{product.rating}</p>
                 </div>
               </div>
             ))}
