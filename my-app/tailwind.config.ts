@@ -18,8 +18,8 @@ const config: Config = {
         customDarkGreen: "#859B7C",
       },
       dropShadow: {
-        custom: ["4px 5px 4px rgba(166, 169, 164)"],
-        customHover: ["4px 5px 4px rgba(133, 138, 130)"],
+        custom: ["3px 3px 2px rgba(166, 169, 164)"],
+        customHover: ["3px 3px 2px rgba(133, 138, 130)"],
       },
     },
   },
