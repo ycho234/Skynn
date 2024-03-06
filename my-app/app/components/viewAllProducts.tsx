@@ -101,7 +101,7 @@ export default function ViewAllProducts() {
                   {product.name}
                 </p>
                 <div className="flex flex-row justify-center items-center">
-                  <p className=" text-[#EBD300] text-xl">
+                  <p className=" text-[#EBD300]">
                     {getStarRating(product.rating)}
                   </p>
                   <p className="pl-1 text-sm ">{product.rating}</p>
