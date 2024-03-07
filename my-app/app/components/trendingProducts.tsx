@@ -66,12 +66,15 @@ export default function TrendingProducts() {
         </h2>
         {/* <div className="overflow-x-scroll flex"> */}
         {/* need to fix this!!!!! */}
-        <div className="relative flex gap-6 overflow-x-auto bg-red-300 ">
+        <div className="relative flex gap-6 md:gap-10 overflow-x-auto">
           {productsList &&
             productsList
               .filter((product) => product.rating === 5)
               .map((product) => (
-                <div key={product.id}>
+                <div
+                  key={product.id}
+                  className=" items-center justify-center flex flex-col w-32 md:w-52 my-4 "
+                >
                   <div className=" w-32 md:w-52 border-[#A6A9A4] border-[2px] my-4 flex justify-center bg-white rounded-3xl hover:border-[#858a82] transition duration-300 ease-in-out drop-shadow-custom hover:drop-shadow-customHover">
                     <Image
                       src={product.photo}
@@ -81,13 +84,13 @@ export default function TrendingProducts() {
                       className="self-center rounded-3xl"
                     />
                   </div>
-                  <p className="text-center font-medium text-xs md:text-sm text-[#474547] bg-green-300">
+                  <p className="text-center font-medium text-xs md:text-sm text-[#474547]">
                     {product.brand.toUpperCase()}
                   </p>
-                  {/* <p className="text-center text-[10px] text-[#474547] bg-blue-300">
+                  <p className="text-center flex text-[10px] md:text-xs text-[#474547] ">
                     {product.name}
-                  </p> */}
-                  <div className="flex flex-row justify-center items-center bg-yellow-600">
+                  </p>
+                  <div className="flex flex-row justify-center items-center">
                     <p className="text-[#EBD300] md:text-xl">
                       {getStarRating(product.rating)}
                     </p>
