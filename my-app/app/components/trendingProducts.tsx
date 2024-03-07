@@ -1,4 +1,4 @@
-"use client";
+"use-client";
 import Image from "next/image";
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
@@ -37,7 +37,7 @@ function getStarRating(rating: number) {
   return stars.join("");
 }
 
-export default function ViewAllProducts() {
+export default function TrendingProducts() {
   const [productsList, setProductList] = useState<null | any[]>(null);
 
   useEffect(() => {
@@ -58,43 +58,45 @@ export default function ViewAllProducts() {
 
     fetchProducts();
   }, []);
-
   return (
     <>
-      <div className="bg-customLightGreen px-6 pb-20">
+      <div className="bg-customLightGreen px-6 py-10 relative">
         <h2 className="text-2xl font-medium pl-2 md:pb-2 text-[#474547]">
-          View All Products
+          Highest Rated Products
         </h2>
-        <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10 ">
+        {/* <div className="overflow-x-scroll flex"> */}
+        <div className="relative flex gap-2 md:gap-10 overflow-x-auto ">
           {productsList &&
-            productsList.map((product) => (
-              <div key={product.id}>
-                <div className=" border-[#A6A9A4] border-[2px] my-4 flex justify-center bg-white rounded-3xl hover:border-[#858a82] transition duration-300 ease-in-out drop-shadow-custom hover:drop-shadow-customHover">
-                  <Image
-                    src={product.photo}
-                    alt={product.name}
-                    width={200}
-                    height={200}
-                    className="self-center rounded-3xl "
-                  />
-                </div>
-                <p className="text-center font-medium text-[#474547]">
-                  {" "}
-                  {product.brand.toUpperCase()}
-                </p>
-                <p className="text-center text-sm text-[#474547]">
-                  {product.name}
-                </p>
-                <div className="flex flex-row justify-center items-center">
-                  <p className=" text-[#EBD300] md:text-xl">
-                    {getStarRating(product.rating)}
+            productsList
+              .filter((product) => product.rating === 5)
+              .map((product) => (
+                <div key={product.id}>
+                  <div className="border-[#A6A9A4] border-[2px] my-4 flex justify-center bg-white rounded-3xl hover:border-[#858a82] transition duration-300 ease-in-out drop-shadow-custom hover:drop-shadow-customHover">
+                    <Image
+                      src={product.photo}
+                      alt={product.name}
+                      width={200}
+                      height={200}
+                      className="self-center rounded-3xl"
+                    />
+                  </div>
+                  <p className="text-center font-medium text-[#474547]">
+                    {product.brand.toUpperCase()}
                   </p>
-                  <p className="pl-1 text-sm ">{product.rating}</p>
+                  <p className="text-center text-sm text-[#474547]">
+                    {product.name}
+                  </p>
+                  <div className="flex flex-row justify-center items-center">
+                    <p className="text-[#EBD300] md:text-xl">
+                      {getStarRating(product.rating)}
+                    </p>
+                    <p className="pl-1 text-sm">{product.rating}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
         </div>
       </div>
+      {/* </div> */}
     </>
   );
 }
