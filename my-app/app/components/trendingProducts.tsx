@@ -60,7 +60,7 @@ export default function TrendingProducts() {
   }, []);
   return (
     <>
-      <div className="bg-customLightGreen px-6 pt-10 py-6 relative">
+      <div className="bg-customLightGreen px-6 pt-3 py-6 relative">
         <h2 className="text-2xl font-medium pl-2 md:pb-2 text-[#474547]">
           Highest Rated Products
         </h2>
