@@ -37,7 +37,11 @@ function getStarRating(rating: number) {
   return stars.join("");
 }
 
-export default function ViewAllProducts() {
+interface ViewProductsProps {
+  filterQuery: string;
+}
+
+const ViewAllProducts: React.FC<ViewProductsProps> = ({ filterQuery }) => {
   const [productsList, setProductList] = useState<null | any[]>(null);
 
   useEffect(() => {
@@ -59,6 +63,13 @@ export default function ViewAllProducts() {
     fetchProducts();
   }, []);
 
+  const filteredProducts = productsList?.filter(
+    (item) =>
+      item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
+      item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
+      item.description.toLowerCase().includes(filterQuery.toLowerCase())
+  );
+
   return (
     <>
       <div className="bg-customLightGreen px-6 pb-20">
@@ -66,8 +77,8 @@ export default function ViewAllProducts() {
           View All Products
         </h2>
         <div className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-10 ">
-          {productsList &&
-            productsList.map((product) => (
+          {filteredProducts &&
+            filteredProducts.map((product) => (
               <div key={product.id}>
                 <div className=" border-[#A6A9A4] border-[2px] my-4 flex justify-center bg-white rounded-3xl hover:border-[#858a82] transition duration-300 ease-in-out drop-shadow-custom hover:drop-shadow-customHover">
                   <Image
@@ -97,7 +108,9 @@ export default function ViewAllProducts() {
       </div>
     </>
   );
-}
+};
+
+export default ViewAllProducts;
 
 // import Image from "next/image";
 // import { getFirestore, getDocs, collection, query } from "firebase/firestore";

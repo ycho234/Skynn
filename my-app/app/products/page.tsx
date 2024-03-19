@@ -34,7 +34,7 @@ export default function ProductsPage() {
       </div>
       <Search onSearch={handleSearch} onReset={handleResetSearch} />
       <TrendingProducts />
-      <ViewAllProducts />
+      <ViewAllProducts filterQuery={searchQuery} />
       <Footer />
     </>
   );

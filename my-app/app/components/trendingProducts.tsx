@@ -58,6 +58,7 @@ export default function TrendingProducts() {
 
     fetchProducts();
   }, []);
+
   return (
     <>
       <div className="bg-customLightGreen px-6 pt-3 py-6 relative">
