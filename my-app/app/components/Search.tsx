@@ -1,6 +1,6 @@
 "use client";
 import React, { ChangeEvent, useState, KeyboardEvent } from "react";
-import Menu from "./Menu";
+import Menu from "./menu";
 
 interface SearchProps {
   onSearch: (query: string) => void;
