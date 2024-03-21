@@ -36,7 +36,6 @@ export default function Search({ onSearch, onReset }: SearchProps) {
         onKeyDown={handleKeyPress}
       />
       <Menu />
-
       <div className="text-[#696c6a] font-medium border-2 border-[#A6A9A3] py-1 px-3 rounded-2xl bg-[#eaede6] hover:bg-[#e2e4df] hover:text-[#474547] hidden sm:block">
         <h2>Filters</h2>
       </div>
