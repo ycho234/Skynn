@@ -1,5 +1,6 @@
 "use client";
 import React, { ChangeEvent, useState, KeyboardEvent } from "react";
+import Menu from "./Menu";
 
 interface SearchProps {
   onSearch: (query: string) => void;
@@ -34,22 +35,8 @@ export default function Search({ onSearch, onReset }: SearchProps) {
         onChange={handleChange}
         onKeyDown={handleKeyPress}
       />
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="44"
-        height="44"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.00"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        className="lucide lucide-menu text-[#626663] sm:hidden "
-      >
-        <line x1="4" x2="20" y1="12" y2="12" />
-        <line x1="4" x2="20" y1="6" y2="6" />
-        <line x1="4" x2="20" y1="18" y2="18" />
-      </svg>
+      <Menu />
+
       <div className="text-[#696c6a] font-medium border-2 border-[#A6A9A3] py-1 px-3 rounded-2xl bg-[#eaede6] hover:bg-[#e2e4df] hover:text-[#474547] hidden sm:block">
         <h2>Filters</h2>
       </div>

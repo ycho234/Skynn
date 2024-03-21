@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import TrendingProducts from "../components/trendingProducts";
 import Search from "../components/Search";
 import { useState } from "react";
+import Menu from "../components/Menu";
 
 import Image from "next/image";
 
