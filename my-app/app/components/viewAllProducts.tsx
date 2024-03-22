@@ -41,7 +41,7 @@ interface ViewProductsProps {
   filterQuery: string;
 }
 
-const ViewAllProducts: React.FC<ViewProductsProps> = ({ filterQuery }) => {
+const ViewAllProducts: React.FC<ViewProductsProps> = ({ filterQuery, /*selectedIngredients*/ }) => {
   const [productsList, setProductList] = useState<null | any[]>(null);
 
   useEffect(() => {
@@ -63,12 +63,21 @@ const ViewAllProducts: React.FC<ViewProductsProps> = ({ filterQuery }) => {
     fetchProducts();
   }, []);
 
-  const filteredProducts = productsList?.filter(
-    (item) =>
-      item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
-      item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(filterQuery.toLowerCase())
-  );
+  // const filteredProducts = productsList?.filter(
+  //   (item) =>
+  //     item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
+  //     item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
+  //     item.description.toLowerCase().includes(filterQuery.toLowerCase())
+  // );
+
+  // Filter products based on both search query and selected ingredients
+  const filteredProducts = productsList?.filter((product) => {
+    return (
+      (product.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(filterQuery.toLowerCase())) /*&&
+      (selectedIngredients.length === 0 || selectedIngredients.some((ingredient) => product.keyIngredients.includes(ingredient)))*/
+    );
+  });
 
   return (
     <>

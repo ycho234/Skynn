@@ -5,11 +5,13 @@ import Footer from "../components/Footer";
 import TrendingProducts from "../components/trendingProducts";
 import Search from "../components/Search";
 import { useState } from "react";
-
 import Image from "next/image";
+// import Menu from "../components/menu";
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
+
+  // const [selectedIngredients, setSelectedIngredients] = useState([]);
 
   // Callback function to update search query
   const handleSearch = (query: string) => {
@@ -20,6 +22,11 @@ export default function ProductsPage() {
   const handleResetSearch = () => {
     setSearchQuery("");
   };
+
+  // Callback function to update selected ingredients (checkboxes)
+  // const handleFilterChange = (ingredients) => {
+  //   setSelectedIngredients(ingredients);
+  // };
 
   return (
     <>
@@ -33,8 +40,9 @@ export default function ProductsPage() {
         />
       </div>
       <Search onSearch={handleSearch} onReset={handleResetSearch} />
+      {/* <Menu onFilterChange={handleFilterChange} /> */}
       <TrendingProducts />
-      <ViewAllProducts filterQuery={searchQuery} />
+      <ViewAllProducts filterQuery={searchQuery} /*selectedIngredients={selectedIngredients}*//>
       <Footer />
     </>
   );
