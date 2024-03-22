@@ -6,7 +6,7 @@ import TrendingProducts from "../components/trendingProducts";
 import Search from "../components/Search";
 import { useState } from "react";
 import Image from "next/image";
-// import Menu from "../components/menu";
+import Menu from "../components/menu";
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -40,9 +40,12 @@ export default function ProductsPage() {
         />
       </div>
       <Search onSearch={handleSearch} onReset={handleResetSearch} />
-      {/* <Menu onFilterChange={handleFilterChange} /> */}
+      <Menu />
+      {/* onFilterChange={handleFilterChange}  */}
       <TrendingProducts />
-      <ViewAllProducts filterQuery={searchQuery} /*selectedIngredients={selectedIngredients}*//>
+      <ViewAllProducts filterQuery={searchQuery} />
+      {/* selectedIngredients={selectedIngredients} */}
+
       <Footer />
     </>
   );

@@ -8,7 +8,7 @@ type labelProps = {
   labelText: string;
 };
 
-export default function CheckboxDemo({ labelText }: labelProps) {
+export default function CheckboxDemo({ labelText }: { labelText: string }) {
   return (
     <div className="flex items-center space-x-2">
       <Checkbox id="terms" />

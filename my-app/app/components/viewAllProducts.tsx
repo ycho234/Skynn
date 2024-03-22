@@ -39,9 +39,13 @@ function getStarRating(rating: number) {
 
 interface ViewProductsProps {
   filterQuery: string;
+  selectedIngredients: string[];
 }
 
-const ViewAllProducts: React.FC<ViewProductsProps> = ({ filterQuery, /*selectedIngredients*/ }) => {
+const ViewAllProducts: React.FC<ViewProductsProps> = ({
+  filterQuery,
+  selectedIngredients,
+}) => {
   const [productsList, setProductList] = useState<null | any[]>(null);
 
   useEffect(() => {
@@ -74,8 +78,14 @@ const ViewAllProducts: React.FC<ViewProductsProps> = ({ filterQuery, /*selectedI
   const filteredProducts = productsList?.filter((product) => {
     return (
       (product.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(filterQuery.toLowerCase())) /*&&
-      (selectedIngredients.length === 0 || selectedIngredients.some((ingredient) => product.keyIngredients.includes(ingredient)))*/
+        product.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
+        product.description
+          .toLowerCase()
+          .includes(filterQuery.toLowerCase())) &&
+      (selectedIngredients.length === 0 ||
+        selectedIngredients.some((ingredient) =>
+          product.keyIngredients.includes(ingredient)
+        ))
     );
   });
 
