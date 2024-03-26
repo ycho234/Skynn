@@ -1,6 +1,5 @@
 "use client";
 import SliderFilter from "../components/SliderFilter";
-import Checkbox from "../components/Checkbox";
 import { useState, useEffect } from "react";
 
 import {
@@ -12,37 +11,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-type MenuProps = string;
+type MenuProps = {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
-export default function Menu({ onFilterChange }) {
-  // const [selectedIngredients, setSelectedIngredients] = useState([]);
-  const [isChecked, setIsChecked] = useState(false);
-
-  // const handleIngredientChange = (ingredient: MenuProps) => {
-  //   if (selectedIngredients.includes(ingredient)) {
-  //     setSelectedIngredients(
-  //       selectedIngredients.filter((i) => i !== ingredient)
-  //     );
-  //   } else {
-  //     setSelectedIngredients([...selectedIngredients, ingredient]);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   onFilterChange(selectedIngredients);
-  // }, [selectedIngredients]);
-
-  // const handleCheckboxChange = (event) => {
-  //   setIsChecked(event.target.checked);
-  //   if (event.target.checked) {
-  //     // Run your function here when checkbox is ticked
-  //     console.log("Checkbox is checked!");
-  //   } else {
-  //     // Run your function here when checkbox is unticked
-  //     console.log("Checkbox is unchecked!");
-  //   }
-  // };
-
+const Menu: React.FC<MenuProps> = ({ onChange }) => {
   return (
     <>
       <Sheet>
@@ -75,17 +48,23 @@ export default function Menu({ onFilterChange }) {
             <h1>Skin Type</h1>
             <SliderFilter defaultValue={[1]} max={5} step={1} />
             <h1>Ingredients</h1>
-            <Checkbox
-              labelText="rice"
-              // onChange={() => handleIngredientChange("rice")}
-            />
-            <Checkbox labelText="hyalouronic acid" />
+            <div>
+              <input type="checkbox" onChange={onChange} name="rice" />
+              <label>Rice</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                onChange={onChange}
+                name="hyalouronic acid"
+              />
+              <label>Hyalarounic Acid</label>
+            </div>
             <h1>Product Type</h1>
-            <Checkbox labelText="lotion" />
-            <Checkbox labelText="suncream" />
-            <Checkbox labelText="serum" />
-            <Checkbox labelText="toner" />
-            <Checkbox labelText="pimple patch" />
+            <div>
+              <input type="checkbox" />
+              <label>Lotion</label>
+            </div>
             <h1>Price Range</h1>
             <SliderFilter />
           </SheetHeader>
@@ -93,4 +72,6 @@ export default function Menu({ onFilterChange }) {
       </Sheet>
     </>
   );
-}
+};
+
+export default Menu;

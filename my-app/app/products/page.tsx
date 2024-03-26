@@ -10,8 +10,7 @@ import Menu from "../components/menu";
 
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
-
-  // const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [filterLabels, setFilterLabels] = useState<string[]>([]);
 
   // Callback function to update search query
   const handleSearch = (query: string) => {
@@ -23,10 +22,22 @@ export default function ProductsPage() {
     setSearchQuery("");
   };
 
-  // Callback function to update selected ingredients (checkboxes)
-  // const handleFilterChange = (ingredients) => {
-  //   setSelectedIngredients(ingredients);
-  // };
+  const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // if (event.target.checked) {
+    //   console.log(`Hello from ${event.target.name}`);
+    // } else {
+    //   console.log(`Bye from ${event.target.name}`);
+    // }
+    if (event.target.checked) {
+      if (filterLabels.includes(event.target.name)) {
+        setFilterLabels(
+          filterLabels.filter((label) => label !== event.target.name)
+        );
+      } else {
+        setFilterLabels([...filterLabels, event.target.name]);
+      }
+    }
+  };
 
   return (
     <>
@@ -40,12 +51,9 @@ export default function ProductsPage() {
         />
       </div>
       <Search onSearch={handleSearch} onReset={handleResetSearch} />
-      <Menu />
-      {/* onFilterChange={handleFilterChange}  */}
+      <Menu onChange={handleCheckBoxChange} />
       <TrendingProducts />
-      <ViewAllProducts filterQuery={searchQuery} />
-      {/* selectedIngredients={selectedIngredients} */}
-
+      <ViewAllProducts filterQuery={searchQuery} filterLabels={filterLabels} />
       <Footer />
     </>
   );
