@@ -13,9 +13,11 @@ import {
 
 type MenuProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  ricechecked: boolean;
+  hlachecked: boolean;
 };
 
-const Menu: React.FC<MenuProps> = ({ onChange, checked }) => {
+const Menu: React.FC<MenuProps> = ({ onChange, ricechecked, hlachecked }) => {
   return (
     <>
       <Sheet>
@@ -49,7 +51,12 @@ const Menu: React.FC<MenuProps> = ({ onChange, checked }) => {
             <SliderFilter defaultValue={[1]} max={5} step={1} />
             <h1>Ingredients</h1>
             <div>
-              <input type="checkbox" onChange={onChange} name="rice" checked={checked}/>
+              <input
+                type="checkbox"
+                onChange={onChange}
+                name="rice"
+                checked={ricechecked}
+              />
               <label>Rice</label>
             </div>
             <div>
@@ -57,8 +64,9 @@ const Menu: React.FC<MenuProps> = ({ onChange, checked }) => {
                 type="checkbox"
                 onChange={onChange}
                 name="hyaluronic acid"
+                checked={hlachecked}
               />
-              <label>Hyalarounic Acid</label>
+              <label>Hyaluronic Acid</label>
             </div>
             <h1>Product Type</h1>
             <div>

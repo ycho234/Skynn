@@ -75,25 +75,23 @@ const ViewAllProducts: React.FC<ViewProductsProps> = ({
   //     item.description.toLowerCase().includes(filterQuery.toLowerCase())
   // );
 
-//for the filter functionality checkboxes
-let filteredProducts;
+  //for the filter functionality checkboxes
+  let filteredProducts;
 
-if (filterLabels) {
-  filteredProducts = productsList?.filter(item =>
-    item.keyIngredients.map((ingredient: string) => ingredient.toLowerCase()).includes(filterLabels.toLowerCase())
-  );
-} else {
-  filteredProducts = productsList?.filter(item =>
-    item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
-    item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
-    item.description.toLowerCase().includes(filterQuery.toLowerCase())
-  );
-}
-
-
-
-
-
+  if (filterLabels) {
+    filteredProducts = productsList?.filter((item) =>
+      item.keyIngredients
+        .map((ingredient: string) => ingredient.toLowerCase())
+        .includes(filterLabels.toLowerCase())
+    );
+  } else {
+    filteredProducts = productsList?.filter(
+      (item) =>
+        item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
+        item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
+        item.description.toLowerCase().includes(filterQuery.toLowerCase())
+    );
+  }
 
   // THE ONE WE ARE WORKING ON
   // filteredProducts = productsList?.filter((item) =>

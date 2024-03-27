@@ -11,7 +11,8 @@ import Menu from "../components/menu";
 export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterLabels, setFilterLabels] = useState("");
-  const [checked, setChecked] = useState(false);
+  const [ricechecked, setRiceChecked] = useState(false);
+  const [hlachecked, setHlaChecked] = useState(false);
 
   // Callback function to update search query
   const handleSearch = (query: string) => {
@@ -24,33 +25,84 @@ export default function ProductsPage() {
   };
 
   // const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   // if (event.target.checked) {
-  //   //   console.log(`Hello from ${event.target.name}`);
-  //   // } else {
-  //   //   console.log(`Bye from ${event.target.name}`);
-  //   // }
-  //   if (event.target.checked) {
-  //     if (filterLabels.includes(event.target.name)) {
-  //       setFilterLabels(
-  //         filterLabels.filter((label) => label !== event.target.name)
-  //       );
-  //     } else {
-  //       setFilterLabels([...filterLabels, event.target.name]);
-  //     }
+  //   if (event.target.checked && event.target.name === "rice") {
+  //     setFilterLabels(event.target.name);
+  //     setRiceChecked(true);
+  //   } else if (
+  //     event.target.name === "hyaluronic acid" &&
+  //     event.target.checked
+  //   ) {
+  //     setHlaChecked(true);
+  //     setFilterLabels(event.target.name);
+  //   } else if ((event.target.name === "rice"  && event.target.checked) || (event.target.name === "hyaluronic acid" && event.target.checked))
+
+  // const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (event.target.name === "rice") {
+  //     setRiceChecked(event.target.checked);
+  //   } else if (event.target.name === "hyaluronic acid") {
+  //     setHlaChecked(event.target.checked);
+  //   }
+
+  //   if (event.target.checked && event.target.name === "rice") {
+  //     setFilterLabels("rice");
+  //   } else if (
+  //     event.target.checked &&
+  //     event.target.name === "hyaluronic acid"
+  //   ) {
+  //     setFilterLabels("hyaluronic acid");
+  //   } else {
+  //     setFilterLabels("");
+  //   }
+  // };
+  // const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, checked } = event.target;
+
+  //   if (name === "rice") {
+  //     setRiceChecked(checked);
+  //   } else if (name === "hyaluronic acid") {
+  //     setHlaChecked(checked);
+  //   }
+
+  //   if (checked) {
+  //     setFilterLabels((prevLabels) => {
+  //       const labels = prevLabels.split(", ").filter((label) => label !== "");
+  //       return [...labels, name].join(", ");
+  //     });
+  //   } else {
+  //     setFilterLabels((prevLabels) => {
+  //       const labels = prevLabels.split(", ").filter((label) => label !== "");
+  //       return labels.filter((label) => label !== name).join(", ");
+  //     });
   //   }
   // };
 
-  const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {  
-    if(event.target.checked){
-      setFilterLabels(event.target.name);
-      setChecked(true);
-    } else{
-      setFilterLabels("");
-      setChecked(false);
+  const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.name === "rice") {
+      setRiceChecked(event.target.checked);
+    } else if (event.target.name === "hyaluronic acid") {
+      setHlaChecked(event.target.checked);
     }
-  }
 
-  
+    if (event.target.checked && event.target.name === "rice" && hlachecked) {
+      setFilterLabels("rice hyaluronic acid");
+    } else if (
+      event.target.checked &&
+      event.target.name === "hyaluronic acid" &&
+      ricechecked
+    ) {
+      setFilterLabels("rice hyaluronic acid");
+    } else if (event.target.checked && event.target.name === "rice") {
+      setFilterLabels("rice");
+    } else if (
+      event.target.checked &&
+      event.target.name === "hyaluronic acid"
+    ) {
+      setFilterLabels("hyaluronic acid");
+    } else {
+      setFilterLabels("");
+    }
+  };
+
   return (
     <>
       <div className="bg-customLightGreen flex justify-center items-center">
@@ -63,7 +115,11 @@ export default function ProductsPage() {
         />
       </div>
       <Search onSearch={handleSearch} onReset={handleResetSearch} />
-      <Menu onChange={handleCheckBoxChange} checked={checked}/>
+      <Menu
+        onChange={handleCheckBoxChange}
+        ricechecked={ricechecked}
+        hlachecked={hlachecked}
+      />
       <TrendingProducts />
       <ViewAllProducts filterQuery={searchQuery} filterLabels={filterLabels} />
       <Footer />
