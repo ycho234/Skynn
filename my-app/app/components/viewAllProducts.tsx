@@ -39,7 +39,7 @@ function getStarRating(rating: number) {
 
 interface ViewProductsProps {
   filterQuery: string;
-  filterLabels: string[];
+  filterLabels: string;
 }
 
 const ViewAllProducts: React.FC<ViewProductsProps> = ({
@@ -68,12 +68,32 @@ const ViewAllProducts: React.FC<ViewProductsProps> = ({
   }, []);
 
   // For the search functionality
-  let filteredProducts = productsList?.filter(
-    (item) =>
-      item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
-      item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
-      item.description.toLowerCase().includes(filterQuery.toLowerCase())
+  // let filteredProducts = productsList?.filter(
+  //   (item) =>
+  //     item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
+  //     item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
+  //     item.description.toLowerCase().includes(filterQuery.toLowerCase())
+  // );
+
+//for the filter functionality checkboxes
+let filteredProducts;
+
+if (filterLabels) {
+  filteredProducts = productsList?.filter(item =>
+    item.keyIngredients.map((ingredient: string) => ingredient.toLowerCase()).includes(filterLabels.toLowerCase())
   );
+} else {
+  filteredProducts = productsList?.filter(item =>
+    item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
+    item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
+    item.description.toLowerCase().includes(filterQuery.toLowerCase())
+  );
+}
+
+
+
+
+
 
   // THE ONE WE ARE WORKING ON
   // filteredProducts = productsList?.filter((item) =>

@@ -15,7 +15,7 @@ type MenuProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const Menu: React.FC<MenuProps> = ({ onChange }) => {
+const Menu: React.FC<MenuProps> = ({ onChange, checked }) => {
   return (
     <>
       <Sheet>
@@ -49,14 +49,14 @@ const Menu: React.FC<MenuProps> = ({ onChange }) => {
             <SliderFilter defaultValue={[1]} max={5} step={1} />
             <h1>Ingredients</h1>
             <div>
-              <input type="checkbox" onChange={onChange} name="rice" />
+              <input type="checkbox" onChange={onChange} name="rice" checked={checked}/>
               <label>Rice</label>
             </div>
             <div>
               <input
                 type="checkbox"
                 onChange={onChange}
-                name="hyalouronic acid"
+                name="hyaluronic acid"
               />
               <label>Hyalarounic Acid</label>
             </div>
