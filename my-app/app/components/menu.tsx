@@ -16,6 +16,8 @@ type MenuProps = {
   ricechecked: boolean;
   hlachecked: boolean;
   niachecked: boolean;
+  tonerchecked: boolean;
+  lotionchecked: boolean;
 };
 
 const Menu: React.FC<MenuProps> = ({
@@ -23,6 +25,8 @@ const Menu: React.FC<MenuProps> = ({
   ricechecked,
   hlachecked,
   niachecked,
+  tonerchecked,
+  lotionchecked,
 }) => {
   return (
     <>
@@ -85,10 +89,26 @@ const Menu: React.FC<MenuProps> = ({
             </div>
             <h1>Product Type</h1>
             <div>
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                onChange={onChange}
+                name="toner"
+                checked={tonerchecked}
+              />
+              <label>Toner</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                onChange={onChange}
+                name="lotion"
+                checked={lotionchecked}
+              />
               <label>Lotion</label>
             </div>
+
             <h1>Price Range</h1>
+
             <SliderFilter />
           </SheetHeader>
         </SheetContent>
