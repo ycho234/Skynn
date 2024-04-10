@@ -67,66 +67,26 @@ const ViewAllProducts: React.FC<ViewProductsProps> = ({
     fetchProducts();
   }, []);
 
-  // For the search functionality
-  // let filteredProducts = productsList?.filter(
-  //   (item) =>
-  //     item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
-  //     item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
-  //     item.description.toLowerCase().includes(filterQuery.toLowerCase())
-  // );
-
   //for the filter functionality checkboxes
   let filteredProducts;
 
-  if (filterLabels) {
-    filteredProducts = productsList?.filter((item) =>
-      item.keyIngredients
-        .map((ingredient: string) => ingredient.toLowerCase())
-        .includes(filterLabels.toLowerCase())
-    );
-  } else {
-    filteredProducts = productsList?.filter(
-      (item) =>
-        item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
-        item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(filterQuery.toLowerCase())
-    );
-  }
+  filteredProducts = productsList?.filter((item) => {
+    // Check if filterLabels exist and if any ingredient matches
+    const labelMatch =
+      filterLabels &&
+      item.keyIngredients.some((ingredient: string) =>
+        filterLabels.toLowerCase().includes(ingredient.toLowerCase())
+      );
 
-  // THE ONE WE ARE WORKING ON
-  // filteredProducts = productsList?.filter((item) =>
-  //   filterLabels.includes(item.name.toLowerCase())
-  // );
+    // Check if any part of item matches filterQuery (the search functionality)
+    const queryMatch =
+      item.name.toLowerCase().includes(filterQuery.toLowerCase()) ||
+      item.brand.toLowerCase().includes(filterQuery.toLowerCase()) ||
+      item.description.toLowerCase().includes(filterQuery.toLowerCase());
 
-  // Apply filters based on filterLabels in the menu
-  // filterLabels.forEach((item: string) => {
-  //   filteredProducts = filteredProducts?.filter((product: any) =>
-  //     product?.keyingredients.some((ingredient: string) =>
-  //       ingredient.toLowerCase().includes(item.toLowerCase())
-  //     )
-  //   );
-  // });
-
-  // filteredProducts = productsList?.filter((item) =>
-  //   item.keyingredients.some((ingredient: string) =>
-  //     filterLabels.includes(ingredient.toLowerCase())
-  //   )
-  // );
-  // filterLabels.forEach((item: string) => {
-  //   filteredProducts = filteredProducts?.filter((product: any) =>
-  //     product?.keyingredients.some((ingredient: string) =>
-  //       ingredient.toLowerCase().includes(item.toLowerCase())
-  //     )
-  //   );
-  // });
-
-  // filterLabels.forEach((item: string) => {
-  //   filteredProducts = filteredProducts?.filter((product: any) =>
-  //     product?.keyingredients.some((ingredient: string) =>
-  //       ingredient.toLowerCase().includes(filterLablels)
-  //     )
-  //   );
-  // });
+    // if no filterLabel go outside and do queryMatch, if filterLabel exists, check if theyre in labelMatch, then do labelMatch wuth queryMatch
+    return (!filterLabels || labelMatch) && queryMatch;
+  });
 
   return (
     <>
