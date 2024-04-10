@@ -15,9 +15,15 @@ type MenuProps = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   ricechecked: boolean;
   hlachecked: boolean;
+  niachecked: boolean;
 };
 
-const Menu: React.FC<MenuProps> = ({ onChange, ricechecked, hlachecked }) => {
+const Menu: React.FC<MenuProps> = ({
+  onChange,
+  ricechecked,
+  hlachecked,
+  niachecked,
+}) => {
   return (
     <>
       <Sheet>
@@ -67,6 +73,15 @@ const Menu: React.FC<MenuProps> = ({ onChange, ricechecked, hlachecked }) => {
                 checked={hlachecked}
               />
               <label>Hyaluronic Acid</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                onChange={onChange}
+                name="niacinamide"
+                checked={niachecked}
+              />
+              <label>Niacinamide</label>
             </div>
             <h1>Product Type</h1>
             <div>

@@ -13,6 +13,7 @@ export default function ProductsPage() {
   const [filterLabels, setFilterLabels] = useState("");
   const [ricechecked, setRiceChecked] = useState(false);
   const [hlachecked, setHlaChecked] = useState(false);
+  const [niachecked, setNiaChecked] = useState(false);
 
   // Callback function to update search query
   const handleSearch = (query: string) => {
@@ -24,82 +25,51 @@ export default function ProductsPage() {
     setSearchQuery("");
   };
 
-  // const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (event.target.checked && event.target.name === "rice") {
-  //     setFilterLabels(event.target.name);
-  //     setRiceChecked(true);
-  //   } else if (
-  //     event.target.name === "hyaluronic acid" &&
-  //     event.target.checked
-  //   ) {
-  //     setHlaChecked(true);
-  //     setFilterLabels(event.target.name);
-  //   } else if ((event.target.name === "rice"  && event.target.checked) || (event.target.name === "hyaluronic acid" && event.target.checked))
-
-  // const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (event.target.name === "rice") {
-  //     setRiceChecked(event.target.checked);
-  //   } else if (event.target.name === "hyaluronic acid") {
-  //     setHlaChecked(event.target.checked);
-  //   }
-
-  //   if (event.target.checked && event.target.name === "rice") {
-  //     setFilterLabels("rice");
-  //   } else if (
-  //     event.target.checked &&
-  //     event.target.name === "hyaluronic acid"
-  //   ) {
-  //     setFilterLabels("hyaluronic acid");
-  //   } else {
-  //     setFilterLabels("");
-  //   }
-  // };
-  // const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, checked } = event.target;
-
-  //   if (name === "rice") {
-  //     setRiceChecked(checked);
-  //   } else if (name === "hyaluronic acid") {
-  //     setHlaChecked(checked);
-  //   }
-
-  //   if (checked) {
-  //     setFilterLabels((prevLabels) => {
-  //       const labels = prevLabels.split(", ").filter((label) => label !== "");
-  //       return [...labels, name].join(", ");
-  //     });
-  //   } else {
-  //     setFilterLabels((prevLabels) => {
-  //       const labels = prevLabels.split(", ").filter((label) => label !== "");
-  //       return labels.filter((label) => label !== name).join(", ");
-  //     });
-  //   }
-  // };
-
   const handleCheckBoxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.name === "rice") {
       setRiceChecked(event.target.checked);
     } else if (event.target.name === "hyaluronic acid") {
       setHlaChecked(event.target.checked);
+    } else if (event.target.name === "niacinamide") {
+      setNiaChecked(event.target.checked);
     }
 
-    if (event.target.checked && event.target.name === "rice" && hlachecked) {
-      setFilterLabels("rice hyaluronic acid");
-    } else if (
-      event.target.checked &&
-      event.target.name === "hyaluronic acid" &&
-      ricechecked
-    ) {
-      setFilterLabels("rice hyaluronic acid");
-    } else if (event.target.checked && event.target.name === "rice") {
-      setFilterLabels("rice");
-    } else if (
-      event.target.checked &&
-      event.target.name === "hyaluronic acid"
-    ) {
-      setFilterLabels("hyaluronic acid");
-    } else {
-      setFilterLabels("");
+    if (event.target.checked) {
+      if (event.target.name === "rice" && hlachecked && niachecked) {
+        setFilterLabels("rice hyaluronic acid niacinamide");
+      } else if (event.target.name === "rice" && hlachecked) {
+        setFilterLabels("rice hyaluronic acid");
+      } else if (event.target.name === "rice" && niachecked) {
+        setFilterLabels("rice niacinamide");
+      } else if (event.target.name === "rice") {
+        setFilterLabels("rice");
+      } else if (
+        event.target.name === "hyaluronic acid" &&
+        ricechecked &&
+        niachecked
+      ) {
+        setFilterLabels("rice hyaluronic acid niacinamide");
+      } else if (event.target.name === "hyaluronic acid" && ricechecked) {
+        setFilterLabels("rice hyaluronic acid");
+      } else if (event.target.name === "hyaluronic acid" && niachecked) {
+        setFilterLabels("hyaluronic acid niacinamide");
+      } else if (event.target.name === "hyaluronic acid") {
+        setFilterLabels("hyaluronic acid");
+      } else if (
+        event.target.name === "niacinamide" &&
+        ricechecked &&
+        hlachecked
+      ) {
+        setFilterLabels("rice hyaluronic acid niacinamide");
+      } else if (event.target.name === "niacinamide" && ricechecked) {
+        setFilterLabels("rice niacinamide");
+      } else if (event.target.name === "niacinamide" && hlachecked) {
+        setFilterLabels("hyaluronic acid niacinamide");
+      } else if (event.target.name === "niacinamide") {
+        setFilterLabels("niacinamide");
+      } else {
+        setFilterLabels("");
+      }
     }
   };
 
@@ -119,6 +89,7 @@ export default function ProductsPage() {
         onChange={handleCheckBoxChange}
         ricechecked={ricechecked}
         hlachecked={hlachecked}
+        niachecked={niachecked}
       />
       <TrendingProducts />
       <ViewAllProducts filterQuery={searchQuery} filterLabels={filterLabels} />
